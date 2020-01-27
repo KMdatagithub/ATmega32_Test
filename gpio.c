@@ -66,7 +66,7 @@ void gpioPortToggle(uint8_t u8_port)
 
 uint8_t gpioPortRead(uint8_t u8_port)
 {
-   uint8_t Port_State;
+   uint8_t Port_State = 0x00;
    switch(u8_port)
    {
         case GPIOA:
@@ -147,7 +147,7 @@ void gpioPinWrite(uint8_t u8_port, uint8_t u8_pins, uint8_t u8_value)
 			            PORTC_DATA |= (u8_pins);
 			            break;
 			case GPIOD:
-		             	PORTA_DATA |= (u8_pins);
+		             	PORTD_DATA |= (u8_pins);
 			            break;
 			default:
 			            break;
@@ -167,7 +167,7 @@ void gpioPinWrite(uint8_t u8_port, uint8_t u8_pins, uint8_t u8_value)
 			            PORTC_DATA &= (~u8_pins);
 	            		break;
 			case GPIOD:
-			            PORTA_DATA &= (~u8_pins);
+			            PORTD_DATA &= (~u8_pins);
 			            break;
 			default:
 			            break;
@@ -196,7 +196,7 @@ void gpioPinToggle(uint8_t u8_port, uint8_t u8_pins)
 
 uint8_t gpioPinRead(uint8_t u8_port, uint8_t u8_pin)
 {
-   uint8_t Ret_State;
+   uint8_t Ret_State = 0x00;
    switch(u8_port)
   {
         case GPIOA:

@@ -58,11 +58,11 @@ void sevenSegWrite(En_SevenSegId_t en_segment_id, uint8_t u8_number)
    switch(en_segment_id)
    {
        case SEG_0:
-                   gpioPinWrite(SEG_BCD_GPIO, SEG_BCD_BITS, u8_number);
+                   gpioPortWrite(SEG_BCD_GPIO, u8_number);
                    gpioPinWrite(SEG_EN1_GPIO, SEG_EN1_BIT, HIGH);
                    break;
        case SEG_1:
-                   gpioPinWrite(SEG_BCD_GPIO, SEG_BCD_BITS, u8_number);
+                   gpioPortWrite(SEG_BCD_GPIO, u8_number);
                    gpioPinWrite(SEG_EN1_GPIO, SEG_EN1_BIT, HIGH);
                    break;
        default:

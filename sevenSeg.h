@@ -18,26 +18,26 @@ typedef enum En_SevenSegId_t{
 }En_SevenSegId_t;
 
 /**
- * Description: 
- * @param 
+ * Description: Initializes The GPIO For 7Seg Display (EN Signal, BCD Pins)
+ * @param a_segment_id: The ID OF The Specific 7Segment Unit You Want To Initialize
  */
-void sevenSegInit(En_SevenSegId_t a_segment_id);
+void sevenSegInit(En_SevenSegId_t en_segment_id);
 
 /**
- * Description: 
- * @param 
+ * Description: Enables The 7Segment Unit By Switching ON The Control Transistor
+ * @param en_segment_id: The ID OF The Specific 7Segment Unit You Want To Enable
  */
 void sevenSegEnable(En_SevenSegId_t en_segment_id);
-
 /**
- * Description: 
- * @param 
+ * Description: Disables The 7Segment Unit By Switching OFF The Control Transistor
+ * @param en_segment_id: The ID OF The Specific 7Segment Unit You Want To Disable
  */
 void sevenSegDisable(En_SevenSegId_t en_segment_id);
 
 /**
- * Description: 
- * @param 
+ * Description: Writes The Required Number On The BCD Data Pins
+ * @param en_segment_id: The ID OF The Specific 7Segment Unit You Want To Write To
+ * @param u8_number:     The Actual Data You Want To Display
  */
 void sevenSegWrite(En_SevenSegId_t en_segment_id, uint8_t u8_number);
 

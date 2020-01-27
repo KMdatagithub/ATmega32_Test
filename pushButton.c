@@ -29,7 +29,7 @@ void pushButtonInit(En_buttonId_t en_butotn_id)
 
 En_buttonStatus_t pushButtonGetStatus(En_buttonId_t en_butotn_id)
 {
-   En_buttonStatus_t ret;
+   En_buttonStatus_t ret = 0x00;
    switch(en_butotn_id)
    {
        case BTN_0:

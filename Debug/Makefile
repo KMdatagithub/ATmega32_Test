@@ -37,12 +37,14 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../dcMotor.c \
 ../gpio.c \
 ../led.c \
 ../main.c \
 ../pushButton.c \
 ../sevenSeg.c \
-../softwareDelay.c
+../softwareDelay.c \
+../timers.c
 
 
 PREPROCESSING_SRCS += 
@@ -52,40 +54,48 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+dcMotor.o \
 gpio.o \
 led.o \
 main.o \
 pushButton.o \
 sevenSeg.o \
-softwareDelay.o
+softwareDelay.o \
+timers.o
 
 OBJS_AS_ARGS +=  \
+dcMotor.o \
 gpio.o \
 led.o \
 main.o \
 pushButton.o \
 sevenSeg.o \
-softwareDelay.o
+softwareDelay.o \
+timers.o
 
 C_DEPS +=  \
+dcMotor.d \
 gpio.d \
 led.d \
 main.d \
 pushButton.d \
 sevenSeg.d \
-softwareDelay.d
+softwareDelay.d \
+timers.d
 
 C_DEPS_AS_ARGS +=  \
+dcMotor.d \
 gpio.d \
 led.d \
 main.d \
 pushButton.d \
 sevenSeg.d \
-softwareDelay.d
+softwareDelay.d \
+timers.d
 
-OUTPUT_FILE_PATH +=ATmega32_Test.elf
+OUTPUT_FILE_PATH +=AVR_Drivers.elf
 
-OUTPUT_FILE_PATH_AS_ARGS +=ATmega32_Test.elf
+OUTPUT_FILE_PATH_AS_ARGS +=AVR_Drivers.elf
 
 ADDITIONAL_DEPENDENCIES:=
 
@@ -97,6 +107,10 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 
@@ -142,13 +156,13 @@ all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
 $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER_SCRIPT_DEP)
 	@echo Building target: $@
 	@echo Invoking: AVR/GNU Linker : 4.9.2
-	$(QUOTE)E:\Prog_Files\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="ATmega32_Test.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega32a -B "E:\Prog_Files\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\gcc\dev\atmega32a"  
+	$(QUOTE)E:\Prog_Files\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE) -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="AVR_Drivers.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=atmega32a -B "E:\Prog_Files\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.0.90\gcc\dev\atmega32a"  
 	@echo Finished building target: $@
-	"E:\Prog_Files\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "ATmega32_Test.elf" "ATmega32_Test.hex"
-	"E:\Prog_Files\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "ATmega32_Test.elf" "ATmega32_Test.eep" || exit 0
-	"E:\Prog_Files\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "ATmega32_Test.elf" > "ATmega32_Test.lss"
-	"E:\Prog_Files\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "ATmega32_Test.elf" "ATmega32_Test.srec"
-	"E:\Prog_Files\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "ATmega32_Test.elf"
+	"E:\Prog_Files\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures  "AVR_Drivers.elf" "AVR_Drivers.hex"
+	"E:\Prog_Files\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "AVR_Drivers.elf" "AVR_Drivers.eep" || exit 0
+	"E:\Prog_Files\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objdump.exe" -h -S "AVR_Drivers.elf" > "AVR_Drivers.lss"
+	"E:\Prog_Files\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature -R .user_signatures "AVR_Drivers.elf" "AVR_Drivers.srec"
+	"E:\Prog_Files\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-size.exe" "AVR_Drivers.elf"
 	
 	
 
@@ -160,5 +174,5 @@ $(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP) $(LINKER
 clean:
 	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)  
 	-$(RM) $(C_DEPS_AS_ARGS)   
-	rm -rf "ATmega32_Test.elf" "ATmega32_Test.a" "ATmega32_Test.hex" "ATmega32_Test.lss" "ATmega32_Test.eep" "ATmega32_Test.map" "ATmega32_Test.srec" "ATmega32_Test.usersignatures"
+	rm -rf "AVR_Drivers.elf" "AVR_Drivers.a" "AVR_Drivers.hex" "AVR_Drivers.lss" "AVR_Drivers.eep" "AVR_Drivers.map" "AVR_Drivers.srec" "AVR_Drivers.usersignatures"
 	

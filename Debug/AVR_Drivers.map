@@ -66,7 +66,7 @@ Discarded input sections
                 0x00000000       0x70 dcMotor.o
  .debug_ranges  0x00000000       0x60 dcMotor.o
  .debug_line    0x00000000      0x137 dcMotor.o
- .debug_str     0x00000000      0x287 dcMotor.o
+ .debug_str     0x00000000      0x285 dcMotor.o
  .comment       0x00000000       0x31 dcMotor.o
  .debug_frame   0x00000000       0xf4 dcMotor.o
  .text          0x00000000        0x0 gpio.o
@@ -98,7 +98,7 @@ Discarded input sections
                 0x00000000       0x38 led.o
  .debug_ranges  0x00000000       0x28 led.o
  .debug_line    0x00000000       0xa7 led.o
- .debug_str     0x00000000      0x227 led.o
+ .debug_str     0x00000000      0x225 led.o
  .comment       0x00000000       0x31 led.o
  .debug_frame   0x00000000       0x54 led.o
  .text          0x00000000        0x0 main.o
@@ -118,7 +118,7 @@ Discarded input sections
                 0x00000000       0x28 pushButton.o
  .debug_ranges  0x00000000       0x18 pushButton.o
  .debug_line    0x00000000       0xa2 pushButton.o
- .debug_str     0x00000000      0x274 pushButton.o
+ .debug_str     0x00000000      0x272 pushButton.o
  .comment       0x00000000       0x31 pushButton.o
  .debug_frame   0x00000000       0x34 pushButton.o
  .text          0x00000000        0x0 sevenSeg.o
@@ -695,18 +695,18 @@ END GROUP
  .debug_frame   0x00000114       0x30 softwareDelay.o
  .debug_frame   0x00000144      0x408 timers.o
 
-.debug_str      0x00000000      0xa3b
+.debug_str      0x00000000      0xa39
  *(.debug_str)
- .debug_str     0x00000000      0x204 gpio.o
-                                0x238 (size before relaxing)
- .debug_str     0x00000204       0x96 main.o
-                                0x200 (size before relaxing)
- .debug_str     0x0000029a       0x67 sevenSeg.o
-                                0x253 (size before relaxing)
- .debug_str     0x00000301       0x2b softwareDelay.o
-                                0x1a6 (size before relaxing)
- .debug_str     0x0000032c      0x70f timers.o
-                                0x8f6 (size before relaxing)
+ .debug_str     0x00000000      0x202 gpio.o
+                                0x236 (size before relaxing)
+ .debug_str     0x00000202       0x96 main.o
+                                0x1fe (size before relaxing)
+ .debug_str     0x00000298       0x67 sevenSeg.o
+                                0x251 (size before relaxing)
+ .debug_str     0x000002ff       0x2b softwareDelay.o
+                                0x1a4 (size before relaxing)
+ .debug_str     0x0000032a      0x70f timers.o
+                                0x8f4 (size before relaxing)
 
 .debug_loc      0x00000000     0x1685
  *(.debug_loc)
@@ -744,5 +744,5 @@ END GROUP
 
 .debug_macro
  *(.debug_macro)
-OUTPUT(ATmega32_Test.elf elf32-avr)
+OUTPUT(AVR_Drivers.elf elf32-avr)
 LOAD linker stubs
