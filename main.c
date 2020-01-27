@@ -9,25 +9,25 @@
 #include "gpio.h"
 #include "led.h"
 #include "pushButton.h"
+#include "timers.h"
 
 //-----------------------------------------------------------------------------
 //  Please Note That All Applications Are Listed Down Below But Commented-Out
 //-----------------------------------------------------------------------------
 // Requirements (1 -> 6)
-/*
+
 int main(void)
 {
 	Led_Init(LED_0);
-	pushButtonInit(BTN_0);
-    while (1) 
+	while(1) 
     {
-		if(pushButtonGetStatus(BTN_0) == Pressed)
-           Led_On(LED_0);
-		else if(pushButtonGetStatus(BTN_0) == Released)
-		   Led_Off(LED_0);
-    }
+		Led_On(LED_0);
+		softwareDelayMs(50);
+		Led_Off(LED_0);
+		softwareDelayMs(50);
+    } 
 }
-*/
+
 //------------------------------------------------------------
 // Application 1 (7-Segments Counter) 0:99
 // Requirement (7)

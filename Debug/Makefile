@@ -42,7 +42,8 @@ C_SRCS +=  \
 ../main.c \
 ../pushButton.c \
 ../sevenSeg.c \
-../softwareDelay.c
+../softwareDelay.c \
+../timers.c
 
 
 PREPROCESSING_SRCS += 
@@ -57,7 +58,8 @@ led.o \
 main.o \
 pushButton.o \
 sevenSeg.o \
-softwareDelay.o
+softwareDelay.o \
+timers.o
 
 OBJS_AS_ARGS +=  \
 gpio.o \
@@ -65,7 +67,8 @@ led.o \
 main.o \
 pushButton.o \
 sevenSeg.o \
-softwareDelay.o
+softwareDelay.o \
+timers.o
 
 C_DEPS +=  \
 gpio.d \
@@ -73,7 +76,8 @@ led.d \
 main.d \
 pushButton.d \
 sevenSeg.d \
-softwareDelay.d
+softwareDelay.d \
+timers.d
 
 C_DEPS_AS_ARGS +=  \
 gpio.d \
@@ -81,7 +85,8 @@ led.d \
 main.d \
 pushButton.d \
 sevenSeg.d \
-softwareDelay.d
+softwareDelay.d \
+timers.d
 
 OUTPUT_FILE_PATH +=ATmega32_Test.elf
 
@@ -97,6 +102,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 
