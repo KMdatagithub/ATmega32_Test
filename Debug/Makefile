@@ -122,8 +122,11 @@ LINKER_SCRIPT_DEP+=
 
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 103520f6cbf2ad458e98c0362ca1ed2252625321
 ./%.o: .././%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
