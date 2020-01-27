@@ -9,7 +9,11 @@
 #include "gpio.h"
 #include "led.h"
 #include "pushButton.h"
+<<<<<<< HEAD
 #include "timers.h"
+=======
+#include "sevenSeg.h"
+>>>>>>> 54c70a1c3b0f68d196c37b60da376eb73b46b81a
 
 //-----------------------------------------------------------------------------
 //  Please Note That All Applications Are Listed Down Below But Commented-Out
@@ -31,7 +35,7 @@ int main(void)
 //------------------------------------------------------------
 // Application 1 (7-Segments Counter) 0:99
 // Requirement (7)
-/*
+
 int main(void)
 {
 	sevenSegInit(SEG_0);
@@ -45,12 +49,12 @@ int main(void)
 		sevenSegWrite(SEG_0, digit0);
 		sevenSegEnable(SEG_0);
 		sevenSegDisable(SEG_1);
-		softwareDelayMs(10);
+		softwareDelayMs(7);
 		
 		sevenSegWrite(SEG_1, digit1);
 		sevenSegEnable(SEG_1);
 		sevenSegDisable(SEG_0);
-		softwareDelayMs(10);
+		softwareDelayMs(7);
 		
 		c++;
 		if(c==50)   // Each 1 Second
@@ -62,7 +66,7 @@ int main(void)
 		}
     }
 }
-*/
+
 //------------------------------------------------------
 // Application 2 (Button & LED)
 // Requirement (8)

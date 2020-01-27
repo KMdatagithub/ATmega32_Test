@@ -3,6 +3,7 @@ ATmega32_Test.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
+<<<<<<< HEAD
   0 .text         000002a6  00000000  00000000  00000054  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   1 .data         00000000  00800060  00800060  000002fa  2**0
@@ -26,6 +27,31 @@ Idx Name          Size      VMA       LMA       File off  Algn
  10 .debug_loc    00000e2e  00000000  00000000  00002bcf  2**0
                   CONTENTS, READONLY, DEBUGGING
  11 .debug_ranges 00000148  00000000  00000000  000039fd  2**0
+=======
+  0 .text         00000304  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000358  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000358  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000388  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 000000d0  00000000  00000000  000003c4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000091a  00000000  00000000  00000494  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000308  00000000  00000000  00000dae  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000002a1  00000000  00000000  000010b6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000144  00000000  00000000  00001358  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000334  00000000  00000000  0000149c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000086f  00000000  00000000  000017d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000090  00000000  00000000  0000203f  2**0
+>>>>>>> 54c70a1c3b0f68d196c37b60da376eb73b46b81a
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -60,6 +86,11 @@ Disassembly of section .text:
   5a:	d8 e0       	ldi	r29, 0x08	; 8
   5c:	de bf       	out	0x3e, r29	; 62
   5e:	cd bf       	out	0x3d, r28	; 61
+<<<<<<< HEAD
+=======
+  60:	0e 94 a6 00 	call	0x14c	; 0x14c <main>
+  64:	0c 94 80 01 	jmp	0x300	; 0x300 <_exit>
+>>>>>>> 54c70a1c3b0f68d196c37b60da376eb73b46b81a
 
 00000060 <__do_clear_bss>:
   60:	20 e0       	ldi	r18, 0x00	; 0
@@ -270,6 +301,7 @@ void gpioPinWrite(uint8_t u8_port, uint8_t u8_pins, uint8_t u8_value)
  150:	08 95       	ret
 			case GPIOD:
 			            PORTA_DATA &= (~u8_pins);
+<<<<<<< HEAD
  152:	8b b3       	in	r24, 0x1b	; 27
  154:	60 95       	com	r22
  156:	68 23       	and	r22, r24
@@ -278,10 +310,174 @@ void gpioPinWrite(uint8_t u8_port, uint8_t u8_pins, uint8_t u8_value)
 
 0000015c <Led_Init>:
 #include "led.h"
+=======
+ 142:	8b b3       	in	r24, 0x1b	; 27
+ 144:	60 95       	com	r22
+ 146:	68 23       	and	r22, r24
+ 148:	6b bb       	out	0x1b, r22	; 27
+ 14a:	08 95       	ret
 
+0000014c <main>:
+// Application 1 (7-Segments Counter) 0:99
+// Requirement (7)
 
-void Led_Init(En_LedNumber_t en_led_id)
+int main(void)
 {
+	sevenSegInit(SEG_0);
+ 14c:	80 e0       	ldi	r24, 0x00	; 0
+ 14e:	0e 94 07 01 	call	0x20e	; 0x20e <sevenSegInit>
+	sevenSegInit(SEG_1);
+ 152:	81 e0       	ldi	r24, 0x01	; 1
+ 154:	0e 94 07 01 	call	0x20e	; 0x20e <sevenSegInit>
+	while(1)
+	{
+		digit1 = counter/10;
+		digit0 = counter%10;
+		
+		sevenSegWrite(SEG_0, digit0);
+ 158:	60 e0       	ldi	r22, 0x00	; 0
+ 15a:	80 e0       	ldi	r24, 0x00	; 0
+ 15c:	0e 94 42 01 	call	0x284	; 0x284 <sevenSegWrite>
+		sevenSegEnable(SEG_0);
+ 160:	80 e0       	ldi	r24, 0x00	; 0
+ 162:	0e 94 20 01 	call	0x240	; 0x240 <sevenSegEnable>
+		sevenSegDisable(SEG_1);
+ 166:	81 e0       	ldi	r24, 0x01	; 1
+ 168:	0e 94 31 01 	call	0x262	; 0x262 <sevenSegDisable>
+		softwareDelayMs(7);
+ 16c:	67 e0       	ldi	r22, 0x07	; 7
+ 16e:	70 e0       	ldi	r23, 0x00	; 0
+ 170:	80 e0       	ldi	r24, 0x00	; 0
+ 172:	90 e0       	ldi	r25, 0x00	; 0
+ 174:	0e 94 5d 01 	call	0x2ba	; 0x2ba <softwareDelayMs>
+		
+		sevenSegWrite(SEG_1, digit1);
+ 178:	60 e0       	ldi	r22, 0x00	; 0
+ 17a:	81 e0       	ldi	r24, 0x01	; 1
+ 17c:	0e 94 42 01 	call	0x284	; 0x284 <sevenSegWrite>
+		sevenSegEnable(SEG_1);
+ 180:	81 e0       	ldi	r24, 0x01	; 1
+ 182:	0e 94 20 01 	call	0x240	; 0x240 <sevenSegEnable>
+		sevenSegDisable(SEG_0);
+ 186:	80 e0       	ldi	r24, 0x00	; 0
+ 188:	0e 94 31 01 	call	0x262	; 0x262 <sevenSegDisable>
+		softwareDelayMs(7);
+ 18c:	67 e0       	ldi	r22, 0x07	; 7
+ 18e:	70 e0       	ldi	r23, 0x00	; 0
+ 190:	80 e0       	ldi	r24, 0x00	; 0
+ 192:	90 e0       	ldi	r25, 0x00	; 0
+ 194:	0e 94 5d 01 	call	0x2ba	; 0x2ba <softwareDelayMs>
+		
+		c++;
+ 198:	d1 e0       	ldi	r29, 0x01	; 1
+
+int main(void)
+{
+	sevenSegInit(SEG_0);
+	sevenSegInit(SEG_1);
+	uint8_t counter = 0, c=0, digit0, digit1;
+ 19a:	10 e0       	ldi	r17, 0x00	; 0
+	while(1)
+	{
+		digit1 = counter/10;
+		digit0 = counter%10;
+ 19c:	0d ec       	ldi	r16, 0xCD	; 205
+ 19e:	01 c0       	rjmp	.+2      	; 0x1a2 <main+0x56>
+		softwareDelayMs(7);
+		
+		c++;
+		if(c==50)   // Each 1 Second
+		{
+		  c=0;
+ 1a0:	d0 e0       	ldi	r29, 0x00	; 0
+	sevenSegInit(SEG_1);
+	uint8_t counter = 0, c=0, digit0, digit1;
+	while(1)
+	{
+		digit1 = counter/10;
+		digit0 = counter%10;
+ 1a2:	10 9f       	mul	r17, r16
+ 1a4:	c1 2d       	mov	r28, r1
+ 1a6:	11 24       	eor	r1, r1
+ 1a8:	c6 95       	lsr	r28
+ 1aa:	c6 95       	lsr	r28
+ 1ac:	c6 95       	lsr	r28
+ 1ae:	9c 2f       	mov	r25, r28
+ 1b0:	99 0f       	add	r25, r25
+ 1b2:	89 2f       	mov	r24, r25
+ 1b4:	88 0f       	add	r24, r24
+ 1b6:	88 0f       	add	r24, r24
+ 1b8:	89 0f       	add	r24, r25
+ 1ba:	61 2f       	mov	r22, r17
+ 1bc:	68 1b       	sub	r22, r24
+		
+		sevenSegWrite(SEG_0, digit0);
+ 1be:	80 e0       	ldi	r24, 0x00	; 0
+ 1c0:	0e 94 42 01 	call	0x284	; 0x284 <sevenSegWrite>
+		sevenSegEnable(SEG_0);
+ 1c4:	80 e0       	ldi	r24, 0x00	; 0
+ 1c6:	0e 94 20 01 	call	0x240	; 0x240 <sevenSegEnable>
+		sevenSegDisable(SEG_1);
+ 1ca:	81 e0       	ldi	r24, 0x01	; 1
+ 1cc:	0e 94 31 01 	call	0x262	; 0x262 <sevenSegDisable>
+		softwareDelayMs(7);
+ 1d0:	67 e0       	ldi	r22, 0x07	; 7
+ 1d2:	70 e0       	ldi	r23, 0x00	; 0
+ 1d4:	80 e0       	ldi	r24, 0x00	; 0
+ 1d6:	90 e0       	ldi	r25, 0x00	; 0
+ 1d8:	0e 94 5d 01 	call	0x2ba	; 0x2ba <softwareDelayMs>
+		
+		sevenSegWrite(SEG_1, digit1);
+ 1dc:	6c 2f       	mov	r22, r28
+ 1de:	81 e0       	ldi	r24, 0x01	; 1
+ 1e0:	0e 94 42 01 	call	0x284	; 0x284 <sevenSegWrite>
+		sevenSegEnable(SEG_1);
+ 1e4:	81 e0       	ldi	r24, 0x01	; 1
+ 1e6:	0e 94 20 01 	call	0x240	; 0x240 <sevenSegEnable>
+		sevenSegDisable(SEG_0);
+ 1ea:	80 e0       	ldi	r24, 0x00	; 0
+ 1ec:	0e 94 31 01 	call	0x262	; 0x262 <sevenSegDisable>
+		softwareDelayMs(7);
+ 1f0:	67 e0       	ldi	r22, 0x07	; 7
+ 1f2:	70 e0       	ldi	r23, 0x00	; 0
+ 1f4:	80 e0       	ldi	r24, 0x00	; 0
+ 1f6:	90 e0       	ldi	r25, 0x00	; 0
+ 1f8:	0e 94 5d 01 	call	0x2ba	; 0x2ba <softwareDelayMs>
+		
+		c++;
+ 1fc:	df 5f       	subi	r29, 0xFF	; 255
+		if(c==50)   // Each 1 Second
+ 1fe:	d2 33       	cpi	r29, 0x32	; 50
+ 200:	81 f6       	brne	.-96     	; 0x1a2 <main+0x56>
+		{
+		  c=0;
+		  counter++;
+ 202:	1f 5f       	subi	r17, 0xFF	; 255
+		  if(counter==100)
+ 204:	14 36       	cpi	r17, 0x64	; 100
+ 206:	61 f6       	brne	.-104    	; 0x1a0 <main+0x54>
+		softwareDelayMs(7);
+		
+		c++;
+		if(c==50)   // Each 1 Second
+		{
+		  c=0;
+ 208:	d0 e0       	ldi	r29, 0x00	; 0
+		  counter++;
+		  if(counter==100)
+		    counter = 0;
+ 20a:	10 e0       	ldi	r17, 0x00	; 0
+ 20c:	ca cf       	rjmp	.-108    	; 0x1a2 <main+0x56>
+>>>>>>> 54c70a1c3b0f68d196c37b60da376eb73b46b81a
+
+0000020e <sevenSegInit>:
+ *  Author: Khaled Magdy
+ */ 
+#include "sevenSeg.h"
+
+void sevenSegInit(En_SevenSegId_t a_segment_id)
+{
+<<<<<<< HEAD
    switch(en_led_id) 
  15c:	81 30       	cpi	r24, 0x01	; 1
  15e:	61 f0       	breq	.+24     	; 0x178 <Led_Init+0x1c>
@@ -325,11 +521,50 @@ void Led_Init(En_LedNumber_t en_led_id)
  19a:	08 95       	ret
 
 0000019c <Led_On>:
+=======
+ 20e:	cf 93       	push	r28
+ 210:	c8 2f       	mov	r28, r24
+   gpioPinDirection(SEG_BCD_GPIO, SEG_BCD_BITS,OUTPUT);  
+ 212:	4f ef       	ldi	r20, 0xFF	; 255
+ 214:	6f e0       	ldi	r22, 0x0F	; 15
+ 216:	81 e0       	ldi	r24, 0x01	; 1
+ 218:	0e 94 36 00 	call	0x6c	; 0x6c <gpioPinDirection>
+   //gpioPinDirection(SEG_BCD_DP_GPIO, SEG_BCD_DP_BIT, OUTPUT);
+   switch(a_segment_id)
+ 21c:	cc 23       	and	r28, r28
+ 21e:	19 f0       	breq	.+6      	; 0x226 <sevenSegInit+0x18>
+ 220:	c1 30       	cpi	r28, 0x01	; 1
+ 222:	39 f0       	breq	.+14     	; 0x232 <sevenSegInit+0x24>
+ 224:	0b c0       	rjmp	.+22     	; 0x23c <sevenSegInit+0x2e>
+   {
+       case SEG_0:
+                   gpioPinDirection(SEG_EN1_GPIO, SEG_EN1_BIT, OUTPUT);
+ 226:	4f ef       	ldi	r20, 0xFF	; 255
+ 228:	64 e0       	ldi	r22, 0x04	; 4
+ 22a:	83 e0       	ldi	r24, 0x03	; 3
+ 22c:	0e 94 36 00 	call	0x6c	; 0x6c <gpioPinDirection>
+                   break;
+ 230:	05 c0       	rjmp	.+10     	; 0x23c <sevenSegInit+0x2e>
+       case SEG_1:
+                   gpioPinDirection(SEG_EN2_GPIO, SEG_EN2_BIT, OUTPUT);      
+ 232:	4f ef       	ldi	r20, 0xFF	; 255
+ 234:	68 e0       	ldi	r22, 0x08	; 8
+ 236:	83 e0       	ldi	r24, 0x03	; 3
+ 238:	0e 94 36 00 	call	0x6c	; 0x6c <gpioPinDirection>
+                   break;
+       default:
+                   break;         
+>>>>>>> 54c70a1c3b0f68d196c37b60da376eb73b46b81a
    }
 }
+ 23c:	cf 91       	pop	r28
+ 23e:	08 95       	ret
 
-void Led_On(En_LedNumber_t en_led_id)
+00000240 <sevenSegEnable>:
+
+void sevenSegEnable(En_SevenSegId_t en_segment_id)
 {
+<<<<<<< HEAD
    switch(en_led_id)
  19c:	81 30       	cpi	r24, 0x01	; 1
  19e:	61 f0       	breq	.+24     	; 0x1b8 <Led_On+0x1c>
@@ -453,12 +688,107 @@ int main(void)
  246:	ed cf       	rjmp	.-38     	; 0x222 <main+0x6>
 
 00000248 <softwareDelayMs>:
+=======
+   switch(en_segment_id)
+ 240:	88 23       	and	r24, r24
+ 242:	19 f0       	breq	.+6      	; 0x24a <sevenSegEnable+0xa>
+ 244:	81 30       	cpi	r24, 0x01	; 1
+ 246:	39 f0       	breq	.+14     	; 0x256 <sevenSegEnable+0x16>
+ 248:	08 95       	ret
+   {
+      case SEG_0:
+                  gpioPinWrite(SEG_EN1_GPIO, SEG_EN1_BIT, HIGH);
+ 24a:	4f ef       	ldi	r20, 0xFF	; 255
+ 24c:	64 e0       	ldi	r22, 0x04	; 4
+ 24e:	83 e0       	ldi	r24, 0x03	; 3
+ 250:	0e 94 6e 00 	call	0xdc	; 0xdc <gpioPinWrite>
+                  break;
+ 254:	08 95       	ret
+      case SEG_1:
+                  gpioPinWrite(SEG_EN2_GPIO, SEG_EN2_BIT, HIGH);
+ 256:	4f ef       	ldi	r20, 0xFF	; 255
+ 258:	68 e0       	ldi	r22, 0x08	; 8
+ 25a:	83 e0       	ldi	r24, 0x03	; 3
+ 25c:	0e 94 6e 00 	call	0xdc	; 0xdc <gpioPinWrite>
+ 260:	08 95       	ret
+
+00000262 <sevenSegDisable>:
+   }
+}
+
+void sevenSegDisable(En_SevenSegId_t en_segment_id)
+{
+   switch(en_segment_id)
+ 262:	88 23       	and	r24, r24
+ 264:	19 f0       	breq	.+6      	; 0x26c <sevenSegDisable+0xa>
+ 266:	81 30       	cpi	r24, 0x01	; 1
+ 268:	39 f0       	breq	.+14     	; 0x278 <sevenSegDisable+0x16>
+ 26a:	08 95       	ret
+   {
+      case SEG_0:
+                  gpioPinWrite(SEG_EN1_GPIO, SEG_EN1_BIT, LOW);
+ 26c:	40 e0       	ldi	r20, 0x00	; 0
+ 26e:	64 e0       	ldi	r22, 0x04	; 4
+ 270:	83 e0       	ldi	r24, 0x03	; 3
+ 272:	0e 94 6e 00 	call	0xdc	; 0xdc <gpioPinWrite>
+                  break;
+ 276:	08 95       	ret
+      case SEG_1:
+                  gpioPinWrite(SEG_EN2_GPIO, SEG_EN2_BIT, LOW);
+ 278:	40 e0       	ldi	r20, 0x00	; 0
+ 27a:	68 e0       	ldi	r22, 0x08	; 8
+ 27c:	83 e0       	ldi	r24, 0x03	; 3
+ 27e:	0e 94 6e 00 	call	0xdc	; 0xdc <gpioPinWrite>
+ 282:	08 95       	ret
+
+00000284 <sevenSegWrite>:
+   }
+}
+
+void sevenSegWrite(En_SevenSegId_t en_segment_id, uint8_t u8_number)
+{
+   switch(en_segment_id)
+ 284:	88 23       	and	r24, r24
+ 286:	19 f0       	breq	.+6      	; 0x28e <sevenSegWrite+0xa>
+ 288:	81 30       	cpi	r24, 0x01	; 1
+ 28a:	61 f0       	breq	.+24     	; 0x2a4 <sevenSegWrite+0x20>
+ 28c:	08 95       	ret
+   {
+       case SEG_0:
+                   gpioPinWrite(SEG_BCD_GPIO, SEG_BCD_BITS, u8_number);
+ 28e:	46 2f       	mov	r20, r22
+ 290:	6f e0       	ldi	r22, 0x0F	; 15
+ 292:	81 e0       	ldi	r24, 0x01	; 1
+ 294:	0e 94 6e 00 	call	0xdc	; 0xdc <gpioPinWrite>
+                   gpioPinWrite(SEG_EN1_GPIO, SEG_EN1_BIT, HIGH);
+ 298:	4f ef       	ldi	r20, 0xFF	; 255
+ 29a:	64 e0       	ldi	r22, 0x04	; 4
+ 29c:	83 e0       	ldi	r24, 0x03	; 3
+ 29e:	0e 94 6e 00 	call	0xdc	; 0xdc <gpioPinWrite>
+                   break;
+ 2a2:	08 95       	ret
+       case SEG_1:
+                   gpioPinWrite(SEG_BCD_GPIO, SEG_BCD_BITS, u8_number);
+ 2a4:	46 2f       	mov	r20, r22
+ 2a6:	6f e0       	ldi	r22, 0x0F	; 15
+ 2a8:	81 e0       	ldi	r24, 0x01	; 1
+ 2aa:	0e 94 6e 00 	call	0xdc	; 0xdc <gpioPinWrite>
+                   gpioPinWrite(SEG_EN1_GPIO, SEG_EN1_BIT, HIGH);
+ 2ae:	4f ef       	ldi	r20, 0xFF	; 255
+ 2b0:	64 e0       	ldi	r22, 0x04	; 4
+ 2b2:	83 e0       	ldi	r24, 0x03	; 3
+ 2b4:	0e 94 6e 00 	call	0xdc	; 0xdc <gpioPinWrite>
+ 2b8:	08 95       	ret
+
+000002ba <softwareDelayMs>:
+>>>>>>> 54c70a1c3b0f68d196c37b60da376eb73b46b81a
  */ 
 #include "softwareDelay.h"
 #include "std_types.h"
 
 void softwareDelayMs(uint32_t u32_delay_in_ms)
 {
+<<<<<<< HEAD
  248:	0f 93       	push	r16
  24a:	1f 93       	push	r17
  24c:	8b 01       	movw	r16, r22
@@ -477,12 +807,33 @@ void softwareDelayMs(uint32_t u32_delay_in_ms)
  25e:	a8 e0       	ldi	r26, 0x08	; 8
  260:	9a 07       	cpc	r25, r26
  262:	d9 f7       	brne	.-10     	; 0x25a <softwareDelayMs+0x12>
+=======
+ 2ba:	0f 93       	push	r16
+ 2bc:	1f 93       	push	r17
+ 2be:	8b 01       	movw	r16, r22
+ 2c0:	9c 01       	movw	r18, r24
+  uint32_t ticks=2290, i, j;
+  for(j=0; j<u32_delay_in_ms; j++)
+ 2c2:	67 2b       	or	r22, r23
+ 2c4:	68 2b       	or	r22, r24
+ 2c6:	69 2b       	or	r22, r25
+ 2c8:	81 f4       	brne	.+32     	; 0x2ea <softwareDelayMs+0x30>
+ 2ca:	17 c0       	rjmp	.+46     	; 0x2fa <softwareDelayMs+0x40>
+ 2cc:	01 96       	adiw	r24, 0x01	; 1
+  {
+    for(i=0; i<ticks; i++)
+ 2ce:	82 3f       	cpi	r24, 0xF2	; 242
+ 2d0:	a8 e0       	ldi	r26, 0x08	; 8
+ 2d2:	9a 07       	cpc	r25, r26
+ 2d4:	d9 f7       	brne	.-10     	; 0x2cc <softwareDelayMs+0x12>
+>>>>>>> 54c70a1c3b0f68d196c37b60da376eb73b46b81a
 #include "std_types.h"
 
 void softwareDelayMs(uint32_t u32_delay_in_ms)
 {
   uint32_t ticks=2290, i, j;
   for(j=0; j<u32_delay_in_ms; j++)
+<<<<<<< HEAD
  264:	4f 5f       	subi	r20, 0xFF	; 255
  266:	5f 4f       	sbci	r21, 0xFF	; 255
  268:	6f 4f       	sbci	r22, 0xFF	; 255
@@ -496,23 +847,47 @@ void softwareDelayMs(uint32_t u32_delay_in_ms)
  278:	40 e0       	ldi	r20, 0x00	; 0
  27a:	50 e0       	ldi	r21, 0x00	; 0
  27c:	ba 01       	movw	r22, r20
+=======
+ 2d6:	4f 5f       	subi	r20, 0xFF	; 255
+ 2d8:	5f 4f       	sbci	r21, 0xFF	; 255
+ 2da:	6f 4f       	sbci	r22, 0xFF	; 255
+ 2dc:	7f 4f       	sbci	r23, 0xFF	; 255
+ 2de:	40 17       	cp	r20, r16
+ 2e0:	51 07       	cpc	r21, r17
+ 2e2:	62 07       	cpc	r22, r18
+ 2e4:	73 07       	cpc	r23, r19
+ 2e6:	31 f4       	brne	.+12     	; 0x2f4 <softwareDelayMs+0x3a>
+ 2e8:	08 c0       	rjmp	.+16     	; 0x2fa <softwareDelayMs+0x40>
+ 2ea:	40 e0       	ldi	r20, 0x00	; 0
+ 2ec:	50 e0       	ldi	r21, 0x00	; 0
+ 2ee:	ba 01       	movw	r22, r20
+>>>>>>> 54c70a1c3b0f68d196c37b60da376eb73b46b81a
  */ 
 #include "softwareDelay.h"
 #include "std_types.h"
 
 void softwareDelayMs(uint32_t u32_delay_in_ms)
 {
+<<<<<<< HEAD
  27e:	f0 e0       	ldi	r31, 0x00	; 0
  280:	e0 e0       	ldi	r30, 0x00	; 0
  282:	8f 2f       	mov	r24, r31
  284:	9e 2f       	mov	r25, r30
  286:	e9 cf       	rjmp	.-46     	; 0x25a <softwareDelayMs+0x12>
+=======
+ 2f0:	f0 e0       	ldi	r31, 0x00	; 0
+ 2f2:	e0 e0       	ldi	r30, 0x00	; 0
+ 2f4:	8f 2f       	mov	r24, r31
+ 2f6:	9e 2f       	mov	r25, r30
+ 2f8:	e9 cf       	rjmp	.-46     	; 0x2cc <softwareDelayMs+0x12>
+>>>>>>> 54c70a1c3b0f68d196c37b60da376eb73b46b81a
   for(j=0; j<u32_delay_in_ms; j++)
   {
     for(i=0; i<ticks; i++)
     { }
   }
 }
+<<<<<<< HEAD
  288:	1f 91       	pop	r17
  28a:	0f 91       	pop	r16
  28c:	08 95       	ret
@@ -541,3 +916,14 @@ ISR(TIMER0_COMP_vect)
 
 000002a4 <__stop_program>:
  2a4:	ff cf       	rjmp	.-2      	; 0x2a4 <__stop_program>
+=======
+ 2fa:	1f 91       	pop	r17
+ 2fc:	0f 91       	pop	r16
+ 2fe:	08 95       	ret
+
+00000300 <_exit>:
+ 300:	f8 94       	cli
+
+00000302 <__stop_program>:
+ 302:	ff cf       	rjmp	.-2      	; 0x302 <__stop_program>
+>>>>>>> 54c70a1c3b0f68d196c37b60da376eb73b46b81a
