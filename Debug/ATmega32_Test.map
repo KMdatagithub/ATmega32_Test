@@ -20,38 +20,50 @@ Discarded input sections
                 0x00000000       0x22 gpio.o
  .text.gpioPinToggle
                 0x00000000       0x30 gpio.o
+ .text.gpioPinRead
+                0x00000000       0x2a gpio.o
  .text          0x00000000        0x0 led.o
  .data          0x00000000        0x0 led.o
  .bss           0x00000000        0x0 led.o
+ .text.Led_Init
+                0x00000000       0x40 led.o
+ .text.Led_On   0x00000000       0x40 led.o
+ .text.Led_Off  0x00000000       0x40 led.o
  .text.Led_Toggle
                 0x00000000       0x38 led.o
+ .debug_info    0x00000000      0x395 led.o
+ .debug_abbrev  0x00000000       0xc9 led.o
+ .debug_loc     0x00000000      0x1b0 led.o
+ .debug_aranges
+                0x00000000       0x38 led.o
+ .debug_ranges  0x00000000       0x28 led.o
+ .debug_line    0x00000000       0xa7 led.o
+ .debug_str     0x00000000      0x22f led.o
+ .comment       0x00000000       0x31 led.o
+ .debug_frame   0x00000000       0x54 led.o
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
  .text          0x00000000        0x0 pushButton.o
  .data          0x00000000        0x0 pushButton.o
  .bss           0x00000000        0x0 pushButton.o
+ .text.pushButtonInit
+                0x00000000       0x40 pushButton.o
+ .text.pushButtonGetStatus
+                0x00000000       0x92 pushButton.o
+ .debug_info    0x00000000      0x30b pushButton.o
+ .debug_abbrev  0x00000000       0xf6 pushButton.o
+ .debug_loc     0x00000000       0xd8 pushButton.o
+ .debug_aranges
+                0x00000000       0x28 pushButton.o
+ .debug_ranges  0x00000000       0x18 pushButton.o
+ .debug_line    0x00000000       0xa1 pushButton.o
+ .debug_str     0x00000000      0x27c pushButton.o
+ .comment       0x00000000       0x31 pushButton.o
+ .debug_frame   0x00000000       0x34 pushButton.o
  .text          0x00000000        0x0 sevenSeg.o
  .data          0x00000000        0x0 sevenSeg.o
  .bss           0x00000000        0x0 sevenSeg.o
- .text.sevenSegInit
-                0x00000000       0x32 sevenSeg.o
- .text.sevenSegEnable
-                0x00000000       0x22 sevenSeg.o
- .text.sevenSegDisable
-                0x00000000       0x22 sevenSeg.o
- .text.sevenSegWrite
-                0x00000000       0x36 sevenSeg.o
- .debug_info    0x00000000      0x2f9 sevenSeg.o
- .debug_abbrev  0x00000000       0xe3 sevenSeg.o
- .debug_loc     0x00000000      0x14c sevenSeg.o
- .debug_aranges
-                0x00000000       0x38 sevenSeg.o
- .debug_ranges  0x00000000       0x28 sevenSeg.o
- .debug_line    0x00000000       0xa4 sevenSeg.o
- .debug_str     0x00000000      0x24d sevenSeg.o
- .comment       0x00000000       0x31 sevenSeg.o
- .debug_frame   0x00000000       0x5c sevenSeg.o
  .text          0x00000000        0x0 softwareDelay.o
  .data          0x00000000        0x0 softwareDelay.o
  .bss           0x00000000        0x0 softwareDelay.o
@@ -193,7 +205,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x3a6
+.text           0x00000000      0x304
  *(.vectors)
  .vectors       0x00000000       0x54 E:/Prog_Files/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.0.90/gcc/dev/atmega32a/avr5/crtatmega32a.o
                 0x00000000                __vector_default
@@ -275,32 +287,28 @@ END GROUP
  .text.gpioPinWrite
                 0x000000dc       0x70 gpio.o
                 0x000000dc                gpioPinWrite
- .text.gpioPinRead
-                0x0000014c       0x2a gpio.o
-                0x0000014c                gpioPinRead
- .text.Led_Init
-                0x00000176       0x40 led.o
-                0x00000176                Led_Init
- .text.Led_On   0x000001b6       0x40 led.o
-                0x000001b6                Led_On
- .text.Led_Off  0x000001f6       0x40 led.o
-                0x000001f6                Led_Off
- .text.main     0x00000236       0x54 main.o
-                0x00000236                main
- .text.pushButtonInit
-                0x0000028a       0x40 pushButton.o
-                0x0000028a                pushButtonInit
- .text.pushButtonGetStatus
-                0x000002ca       0x92 pushButton.o
-                0x000002ca                pushButtonGetStatus
+ .text.main     0x0000014c       0xc2 main.o
+                0x0000014c                main
+ .text.sevenSegInit
+                0x0000020e       0x32 sevenSeg.o
+                0x0000020e                sevenSegInit
+ .text.sevenSegEnable
+                0x00000240       0x22 sevenSeg.o
+                0x00000240                sevenSegEnable
+ .text.sevenSegDisable
+                0x00000262       0x22 sevenSeg.o
+                0x00000262                sevenSegDisable
+ .text.sevenSegWrite
+                0x00000284       0x36 sevenSeg.o
+                0x00000284                sevenSegWrite
  .text.softwareDelayMs
-                0x0000035c       0x46 softwareDelay.o
-                0x0000035c                softwareDelayMs
-                0x000003a2                . = ALIGN (0x2)
+                0x000002ba       0x46 softwareDelay.o
+                0x000002ba                softwareDelayMs
+                0x00000300                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000003a2        0x0 e:/prog_files/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
-                0x000003a2                _exit
-                0x000003a2                exit
+ .fini9         0x00000300        0x0 e:/prog_files/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+                0x00000300                _exit
+                0x00000300                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -319,11 +327,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000003a2        0x4 e:/prog_files/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000300        0x4 e:/prog_files/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000003a6                _etext = .
+                0x00000304                _etext = .
 
-.data           0x00800060        0x0 load address 0x000003a6
+.data           0x00800060        0x0 load address 0x00000304
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -340,8 +348,8 @@ END GROUP
  *(.bss*)
  *(COMMON)
                 0x00800060                PROVIDE (__bss_end, .)
-                0x000003a6                __data_load_start = LOADADDR (.data)
-                0x000003a6                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000304                __data_load_start = LOADADDR (.data)
+                0x00000304                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800060        0x0
                 0x00800060                PROVIDE (__noinit_start, .)
@@ -391,9 +399,8 @@ END GROUP
  *(.comment)
  .comment       0x00000000       0x30 gpio.o
                                  0x31 (size before relaxing)
- .comment       0x00000030       0x31 led.o
  .comment       0x00000030       0x31 main.o
- .comment       0x00000030       0x31 pushButton.o
+ .comment       0x00000030       0x31 sevenSeg.o
  .comment       0x00000030       0x31 softwareDelay.o
 
 .note.gnu.avr.deviceinfo
@@ -416,73 +423,65 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0xf8
+.debug_aranges  0x00000000       0xd0
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x58 gpio.o
  .debug_aranges
-                0x00000058       0x38 led.o
+                0x00000058       0x20 main.o
  .debug_aranges
-                0x00000090       0x20 main.o
+                0x00000078       0x38 sevenSeg.o
  .debug_aranges
-                0x000000b0       0x28 pushButton.o
- .debug_aranges
-                0x000000d8       0x20 softwareDelay.o
+                0x000000b0       0x20 softwareDelay.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0xc29
+.debug_info     0x00000000      0x91a
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x264 gpio.o
- .debug_info    0x00000264      0x395 led.o
- .debug_info    0x000005f9      0x262 main.o
- .debug_info    0x0000085b      0x30b pushButton.o
- .debug_info    0x00000b66       0xc3 softwareDelay.o
+ .debug_info    0x00000264      0x2fa main.o
+ .debug_info    0x0000055e      0x2f9 sevenSeg.o
+ .debug_info    0x00000857       0xc3 softwareDelay.o
 
-.debug_abbrev   0x00000000      0x3db
+.debug_abbrev   0x00000000      0x308
  *(.debug_abbrev)
  .debug_abbrev  0x00000000       0xcd gpio.o
- .debug_abbrev  0x000000cd       0xc9 led.o
- .debug_abbrev  0x00000196       0xd1 main.o
- .debug_abbrev  0x00000267       0xf6 pushButton.o
- .debug_abbrev  0x0000035d       0x7e softwareDelay.o
+ .debug_abbrev  0x000000cd       0xda main.o
+ .debug_abbrev  0x000001a7       0xe3 sevenSeg.o
+ .debug_abbrev  0x0000028a       0x7e softwareDelay.o
 
-.debug_line     0x00000000      0x337
+.debug_line     0x00000000      0x2a1
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x10b gpio.o
- .debug_line    0x0000010b       0xa7 led.o
- .debug_line    0x000001b2       0x7d main.o
- .debug_line    0x0000022f       0xa1 pushButton.o
- .debug_line    0x000002d0       0x67 softwareDelay.o
+ .debug_line    0x0000010b       0x8b main.o
+ .debug_line    0x00000196       0xa4 sevenSeg.o
+ .debug_line    0x0000023a       0x67 softwareDelay.o
 
-.debug_frame    0x00000000      0x170
+.debug_frame    0x00000000      0x144
  *(.debug_frame)
  .debug_frame   0x00000000       0x94 gpio.o
- .debug_frame   0x00000094       0x54 led.o
- .debug_frame   0x000000e8       0x24 main.o
- .debug_frame   0x0000010c       0x34 pushButton.o
- .debug_frame   0x00000140       0x30 softwareDelay.o
+ .debug_frame   0x00000094       0x24 main.o
+ .debug_frame   0x000000b8       0x5c sevenSeg.o
+ .debug_frame   0x00000114       0x30 softwareDelay.o
 
-.debug_str      0x00000000      0x394
+.debug_str      0x00000000      0x334
  *(.debug_str)
  .debug_str     0x00000000      0x20c gpio.o
                                 0x240 (size before relaxing)
- .debug_str     0x0000020c       0x91 led.o
-                                0x22f (size before relaxing)
- .debug_str     0x0000029d       0xad main.o
-                                0x256 (size before relaxing)
- .debug_str     0x0000034a       0x1f pushButton.o
-                                0x27c (size before relaxing)
- .debug_str     0x00000369       0x2b softwareDelay.o
+ .debug_str     0x0000020c       0x96 main.o
+                                0x208 (size before relaxing)
+ .debug_str     0x000002a2       0x67 sevenSeg.o
+                                0x24d (size before relaxing)
+ .debug_str     0x00000309       0x2b softwareDelay.o
                                 0x1ae (size before relaxing)
 
-.debug_loc      0x00000000      0x8b5
+.debug_loc      0x00000000      0x86f
  *(.debug_loc)
  .debug_loc     0x00000000      0x59e gpio.o
- .debug_loc     0x0000059e      0x1b0 led.o
- .debug_loc     0x0000074e       0xd8 pushButton.o
- .debug_loc     0x00000826       0x8f softwareDelay.o
+ .debug_loc     0x0000059e       0xf6 main.o
+ .debug_loc     0x00000694      0x14c sevenSeg.o
+ .debug_loc     0x000007e0       0x8f softwareDelay.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -502,13 +501,12 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000       0xa8
+.debug_ranges   0x00000000       0x90
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x48 gpio.o
- .debug_ranges  0x00000048       0x28 led.o
- .debug_ranges  0x00000070       0x10 main.o
- .debug_ranges  0x00000080       0x18 pushButton.o
- .debug_ranges  0x00000098       0x10 softwareDelay.o
+ .debug_ranges  0x00000048       0x10 main.o
+ .debug_ranges  0x00000058       0x28 sevenSeg.o
+ .debug_ranges  0x00000080       0x10 softwareDelay.o
 
 .debug_macro
  *(.debug_macro)
